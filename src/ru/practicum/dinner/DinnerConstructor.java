@@ -12,14 +12,12 @@ public class DinnerConstructor {
         mapDishes = new HashMap<>();
     }
 
-    void saveDishes(String type, String name) {
-        if (mapDishes.containsKey(type)) {
-            ArrayList<String> dishesList = mapDishes.get(type);
-            dishesList.add(name);
-        } else {
-            ArrayList<String> dishesList = new ArrayList<>();
-            dishesList.add(name);
-            mapDishes.put(type, dishesList);
+    void saveDishes(String dishType, String dishName) {
+
+        ArrayList<String> dishesNames = mapDishes.computeIfAbsent(dishType, k -> new ArrayList<>()); // Спасибо за наводку!
+
+        if (!dishesNames.contains(dishName)) {
+            dishesNames.add(dishName);
         }
     }
 
